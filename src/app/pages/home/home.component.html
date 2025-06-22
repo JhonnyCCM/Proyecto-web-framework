@@ -1,0 +1,306 @@
+<div class="app-container flex flex-col w-full min-h-screen">
+    <main class="main-content flex-1 flex flex-col">
+
+        <header class="main-header flex items-center justify-between p-4 bg-base-200 border-b border-neutral sticky top-0 z-50">
+            <div class="header-left">
+                <img src="favicon.ico" alt="CourseConnect" class="w-auto h-8 object-contain">
+            </div>
+            <div class="header-center flex-1 mx-4">
+                <div class="search-container relative flex items-center">
+                    <input type="text" class="search-input input input-bordered w-full p-2 pl-10 text-base-content placeholder-base-content/70" placeholder="Buscar cursos, instructores..." id="searchInput">
+                    <button class="search-btn absolute left-3 text-base-content/80">🔍</button>
+                </div>
+            </div>
+            <div class="header-right flex items-center gap-4">
+                <button class="filter-btn btn btn-ghost btn-circle text-xl">⚙️</button>
+                <div class="relative">
+                     <button class="notification-btn btn btn-ghost btn-circle text-xl">🔔</button>
+                    <span class="notification-badge badge badge-sm badge-error absolute top-0 right-0">3</span>
+                </div>
+                <div class="user-profile flex items-center gap-2 cursor-pointer" (click)="toggleUserMenu()">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="User" class="user-avatar w-10 h-10 rounded-full object-cover">
+                    <span class="user-name text-base-content font-semibold" id="userName">Joseph Mitchell</span>
+                    <span class="user-dropdown text-base-content/70">▼</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero-section bg-gradient-to-br from-base-100 via-base-200 to-primary p-12 relative overflow-hidden">
+            <div class="hero-content container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="hero-text z-10">
+                    <h1 class="hero-title text-5xl font-extrabold leading-tight text-base-content mb-6">
+                        Domina las habilidades del
+                        <span class="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500">futuro digital</span>
+                    </h1>
+                    <p class="hero-description text-lg text-base-content/90 leading-relaxed mb-8">
+                        Únete a más de 50,000 estudiantes que ya transformaron sus carreras.
+                        Cursos prácticos, certificados reconocidos y soporte 24/7.
+                    </p>
+                    <div class="hero-features flex flex-wrap gap-6 mb-8">
+                        <div class="feature-highlight flex items-center gap-2 text-base-content/80 text-sm">
+                            <span class="feature-icon text-success font-semibold">✓</span>
+                            <span>Certificados oficiales</span>
+                        </div>
+                        <div class="feature-highlight flex items-center gap-2 text-base-content/80 text-sm">
+                            <span class="feature-icon text-success font-semibold">✓</span>
+                            <span>Proyectos reales</span>
+                        </div>
+                        <div class="feature-highlight flex items-center gap-2 text-base-content/80 text-sm">
+                            <span class="feature-icon text-success font-semibold">✓</span>
+                            <span>Mentorías personalizadas</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions flex flex-col sm:flex-row gap-4 mb-12">
+                         <button class="btn btn-primary hero-btn px-8 py-4 rounded-xl text-lg font-semibold flex items-center gap-2 transition-all duration-300 cursor-pointer border-none bg-gradient-to-br from-primary to-primary-focus text-primary-content hover:translate-y-[-2px] hover:shadow-lg hover:shadow-primary/30" (click)="goToCourses()">
+                            Comenzar Ahora
+                            <span class="btn-icon">🚀</span>
+                        </button>
+                        <div class="price-highlight flex items-baseline gap-1 bg-primary/10 p-3 rounded-lg border border-primary/30">
+                            <span class="price-text text-sm text-base-content/80">Desde</span>
+                            <span class="price-amount text-2xl font-bold text-primary">$99</span>
+                            <span class="price-period text-sm text-base-content/80">/curso</span>
+                        </div>
+                    </div>
+                    <div class="social-proof mt-8">
+                        <div class="rating-display flex items-center gap-3">
+                            <div class="stars text-yellow-400 text-xl">⭐⭐⭐⭐⭐</div>
+                            <span class="rating-text text-base-content/80 text-sm">4.9/5 basado en 2,847 reseñas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual relative h-[500px]">
+                    <div class="floating-cards absolute inset-0">
+                        <div class="floating-card absolute bg-base-200 rounded-2xl p-6 border border-neutral shadow-md flex items-center gap-4 animate-float" style="top: 10%; left: 10%; animation-delay: 0s;">
+                            <div class="card-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">🎨</div>
+                            <div class="card-content">
+                                <h4 class="text-base-content text-base font-semibold mb-1">UI/UX Design</h4>
+                                <p class="text-base-content/80 text-xs">120 estudiantes</p>
+                            </div>
+                        </div>
+                        <div class="floating-card absolute bg-base-200 rounded-2xl p-6 border border-neutral shadow-md flex items-center gap-4 animate-float" style="top: 40%; right: 20%; animation-delay: 2s;">
+                            <div class="card-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">💻</div>
+                            <div class="card-content">
+                                <h4>Desarrollo Web</h4>
+                                <p class="text-base-content/80 text-xs">89 estudiantes</p>
+                            </div>
+                        </div>
+                        <div class="floating-card absolute bg-base-200 rounded-2xl p-6 border border-neutral shadow-md flex items-center gap-4 animate-float" style="bottom: 20%; left: 20%; animation-delay: 4s;">
+                            <div class="card-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">📱</div>
+                            <div class="card-content">
+                                <h4>Marketing Digital</h4>
+                                <p class="text-base-content/80 text-xs">156 estudiantes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-illustration absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 -z-10">
+                        <div class="illustration-bg w-full h-full rounded-full" style="background: radial-gradient(circle, #6366f11a 0%, transparent 70%);"></div>
+                        <div class="geometric-shapes absolute inset-0">
+                            <div class="shape shape-1 absolute rounded-full w-20 h-20 bg-gradient-to-br from-primary to-purple-500 top-1/5 left-1/5 animate-rotate" style="animation-delay: 0s;"></div>
+                            <div class="shape shape-2 absolute rounded-full w-16 h-16 bg-gradient-to-br from-pink-500 to-orange-500 top-3/5 right-1/4 animate-rotate" style="animation-delay: 5s;"></div>
+                            <div class="shape shape-3 absolute rounded-full w-10 h-10 bg-gradient-to-br from-emerald-500 to-cyan-500 bottom-1/3 left-1/3 animate-rotate" style="animation-delay: 10s;"></div>
+                            <div class="shape shape-4 absolute rounded-full w-24 h-24 bg-gradient-to-br from-amber-500 to-red-500 top-[10%] right-[10%] animate-rotate" style="animation-delay: 15s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-stats p-8 bg-base-200 border-b border-neutral">
+            <div class="stats-container container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card bg-base-100 rounded-2xl p-6 border border-neutral flex items-center gap-4 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md">
+                    <div class="stat-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">📈</div>
+                    <div class="stat-info flex-1">
+                        <h3 class="stat-title text-base-content text-base font-semibold mb-2">Tu Progreso</h3>
+                        <p class="stat-value text-primary text-2xl font-bold mb-1">75% Completado</p>
+                        <progress class="progress progress-primary w-full" value="75" max="100"></progress>
+                    </div>
+                </div>
+                <div class="stat-card bg-base-100 rounded-2xl p-6 border border-neutral flex items-center gap-4 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md">
+                    <div class="stat-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">🏆</div>
+                    <div class="stat-info flex-1">
+                        <h3 class="stat-title text-base-content text-base font-semibold mb-2">Certificados</h3>
+                        <p class="stat-value text-primary text-2xl font-bold mb-1">3 Obtenidos</p>
+                        <span class="stat-badge badge badge-primary badge-outline text-xs">+2 este mes</span>
+                    </div>
+                </div>
+                <div class="stat-card bg-base-100 rounded-2xl p-6 border border-neutral flex items-center gap-4 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md">
+                    <div class="stat-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">⏱️</div>
+                    <div class="stat-info flex-1">
+                        <h3 class="stat-title text-base-content text-base font-semibold mb-2">Tiempo de Estudio</h3>
+                        <p class="stat-value text-primary text-2xl font-bold mb-1">24.5 horas</p>
+                        <span class="stat-badge badge badge-primary badge-outline text-xs">Esta semana</span>
+                    </div>
+                </div>
+                <div class="stat-card bg-base-100 rounded-2xl p-6 border border-neutral flex items-center gap-4 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md">
+                    <div class="stat-icon text-2xl w-16 h-16 bg-gradient-to-br from-primary to-primary-focus rounded-xl flex items-center justify-center">🎯</div>
+                    <div class="stat-info flex-1">
+                        <h3 class="stat-title text-base-content text-base font-semibold mb-2">Racha de Estudio</h3>
+                        <p class="stat-value text-primary text-2xl font-bold mb-1">12 días</p>
+                        <span class="stat-badge badge badge-primary badge-outline text-xs">¡Sigue así!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-courses p-12 max-w-7xl mx-auto">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-4xl font-bold text-base-content mb-4">Cursos Destacados</h2>
+                <p class="section-subtitle text-lg text-base-content/90 mb-6">Los cursos más populares de nuestra plataforma</p>
+                 <button class="see-all-btn link link-primary font-semibold text-base" (click)="goToCourses()">
+                    Ver todos los cursos →
+                </button>
+            </div>
+            <div class="carousel-container relative max-w-7xl mx-auto px-8">
+                <div class="carousel-wrapper relative overflow-hidden rounded-2xl">
+                    <button class="carousel-btn prev-btn btn btn-circle absolute top-1/2 -translate-y-1/2 z-10 -left-6" id="prevBtn" #prevBtn>‹</button>
+                    <div class="carousel-track flex transition-transform duration-500 ease-in-out gap-8 p-4" id="carouselTrack" #carouselTrack>
+                        <div *ngFor="let course of courses"
+                             class="carousel-course-card flex-shrink-0 w-80 bg-base-200 rounded-2xl overflow-hidden border border-neutral transition-all duration-300 relative cursor-pointer hover:translate-y-[-8px] hover:shadow-2xl hover:border-primary"
+                             (click)="viewCourse(course.id)">
+                            <div *ngIf="course.discount" class="course-discount-badge badge badge-error absolute top-3 left-3 z-10">
+                                -{{ course.discount }}%
+                            </div>
+                            <div class="carousel-course-image relative h-52 overflow-hidden">
+                                <img [src]="course.image" [alt]="course.title" class="w-full h-full object-cover">
+                            </div>
+                            <div class="carousel-course-content p-6">
+                                <div class="carousel-course-header flex justify-between items-start mb-4">
+                                    <h3 class="carousel-course-title text-base-content text-xl font-semibold m-0">{{ course.title }}</h3>
+                                    <div class="carousel-course-rating flex items-center gap-1">
+                                        <span class="rating-stars text-yellow-400 text-sm">{{ '★'.repeat(math.floor(course.rating)) }}{{ course.rating % 1 ? '☆' : '' }}</span>
+                                        <span class="rating-number text-base-content text-sm font-semibold">{{ course.rating }}</span>
+                                    </div>
+                                </div>
+                                <p class="carousel-course-description text-base-content/80 text-sm leading-relaxed mb-4 line-clamp-2">{{ course.description }}</p>
+                                <div class="carousel-course-tags flex flex-wrap gap-2 mb-4">
+                                     <span *ngFor="let tag of course.tags" class="carousel-course-tag badge badge-primary">{{ tag }}</span>
+                                </div>
+                                <div class="carousel-course-meta flex gap-4 mb-4 text-xs text-base-content/70">
+                                    <span>{{ course.duration }}</span>
+                                    <span>{{ course.level }}</span>
+                                </div>
+                                <div class="carousel-course-footer flex justify-between items-center pt-4 border-t border-neutral">
+                                    <div class="carousel-instructor text-sm text-base-content/80">
+                                        Instructor: <span class="carousel-instructor-name font-semibold text-base-content">{{ course.instructor }}</span>
+                                    </div>
+                                    <div class="carousel-price flex flex-col items-end">
+                                        <span *ngIf="course.originalPrice" class="carousel-original-price text-base-content/70 text-xs line-through">${{ course.originalPrice }}</span>
+                                        <span class="carousel-current-price text-primary font-bold text-lg">${{ course.price }}</span>
+                                    </div>
+                                </div>
+                                <div class="carousel-course-start text-xs text-base-content/70 mt-2">
+                                    Inicio: {{ formatDate(course.startDate) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next-btn btn btn-circle absolute top-1/2 -translate-y-1/2 z-10 -right-6" id="nextBtn" #nextBtn>›</button>
+                </div>
+                <div class="carousel-indicators flex justify-center gap-2 mt-8" id="carouselIndicators" #carouselIndicators>
+                </div>
+            </div>
+        </section>
+
+        <section class="learning-path p-12 max-w-7xl mx-auto">
+            <div class="path-header text-center mb-12">
+                <h2 class="section-title text-4xl font-bold text-base-content mb-4">Tu Ruta de Aprendizaje</h2>
+                <p class="section-subtitle text-lg text-base-content/90 mb-6">Continúa donde lo dejaste</p>
+            </div>
+            <div class="path-timeline max-w-3xl mx-auto">
+                <div class="timeline-item flex items-center gap-6 p-6 mb-4 rounded-2xl transition-all duration-300 bg-emerald-900/20 border border-emerald-700/50">
+                    <div class="timeline-marker w-12 h-12 rounded-full flex items-center justify-center text-2xl font-semibold flex-shrink-0 bg-emerald-500 text-white">✓</div>
+                    <div class="timeline-content flex-1">
+                        <h4 class="text-base-content text-lg font-semibold mb-2">Fundamentos de UI/UX</h4>
+                        <p class="text-base-content/90 text-sm mb-2">Completado • 8 lecciones</p>
+                        <div class="timeline-progress text-primary text-sm font-semibold">100%</div>
+                    </div>
+                </div>
+                <div class="timeline-item flex items-center gap-6 p-6 mb-4 rounded-2xl transition-all duration-300 bg-primary/10 border border-primary/30">
+                    <div class="timeline-marker w-12 h-12 rounded-full flex items-center justify-center text-2xl font-semibold flex-shrink-0 bg-primary text-white">📚</div>
+                    <div class="timeline-content flex-1">
+                        <h4 class="text-base-content text-lg font-semibold mb-2">Diseño de Interfaces Avanzado</h4>
+                        <p class="text-base-content/90 text-sm mb-2">En progreso • 5 de 12 lecciones</p>
+                        <div class="timeline-progress text-primary text-sm font-semibold">42%</div>
+                    </div>
+                </div>
+                <div class="timeline-item flex items-center gap-6 p-6 mb-4 rounded-2xl transition-all duration-300 bg-base-200 border border-neutral opacity-70">
+                    <div class="timeline-marker w-12 h-12 rounded-full flex items-center justify-center text-2xl font-semibold flex-shrink-0 bg-base-100 text-base-content/70">🔒</div>
+                    <div class="timeline-content flex-1">
+                        <h4 class="text-base-content text-lg font-semibold mb-2">Prototipado y Testing</h4>
+                        <p class="text-base-content/90 text-sm mb-2">Próximamente • 10 lecciones</p>
+                        <div class="timeline-progress text-primary text-sm font-semibold">0%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials p-12 max-w-7xl mx-auto">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title text-4xl font-bold text-base-content mb-4">Lo que dicen nuestros estudiantes</h2>
+                <p class="section-subtitle text-lg text-base-content/90 mb-6">Historias reales de éxito</p>
+            </div>
+             <div class="testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-base-200 rounded-2xl p-8 border border-neutral transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl">
+                    <div class="testimonial-content mb-6">
+                        <div class="stars text-yellow-400 text-xl mb-4">⭐⭐⭐⭐⭐</div>
+                        <p class="text-base-content text-base leading-relaxed italic">"CourseConnect cambió mi carrera completamente. Los cursos son de alta calidad y los instructores son increíbles."</p>
+                    </div>
+                    <div class="testimonial-author flex items-center gap-4">
+                        <img src="https://via.placeholder.com/50x50?text=User" alt="María García" class="author-avatar w-12 h-12 rounded-full object-cover">
+                        <div class="author-info">
+                            <h4 class="text-base-content text-base font-semibold mb-1">María García</h4>
+                            <p class="text-base-content/90 text-sm">UX Designer en Google</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section class="benefits-section p-16 bg-base-200 border-t border-neutral">
+            <div class="benefits-container max-w-7xl mx-auto text-center">
+                <h2 class="benefits-title text-4xl font-bold text-base-content mb-12">¿Por qué elegir CourseConnect?</h2>
+                <div class="benefits-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="benefit-card bg-base-100 rounded-2xl p-8 border border-neutral transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl hover:border-primary">
+                        <div class="benefit-icon text-5xl mb-4">🎯</div>
+                        <h3 class="text-base-content text-xl font-semibold mb-4">Aprendizaje Práctico</h3>
+                        <p class="text-base-content/90 leading-relaxed">Proyectos reales que puedes agregar a tu portafolio profesional</p>
+                    </div>
+                     </div>
+            </div>
+        </section>
+
+        <section class="guarantee-section p-12 bg-gradient-to-br from-success to-emerald-700 text-white">
+            <div class="guarantee-content max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="guarantee-badge flex items-center gap-4">
+                    <div class="badge-icon text-5xl w-20 h-20 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">🛡️</div>
+                    <div class="badge-text">
+                        <h3 class="text-2xl font-bold mb-2">Garantía de 30 días</h3>
+                        <p class="opacity-90 text-base">Si no estás satisfecho, te devolvemos tu dinero</p>
+                    </div>
+                </div>
+                <div class="guarantee-features flex flex-col gap-4">
+                     </div>
+            </div>
+        </section>
+
+        <section class="cta-section bg-gradient-to-br from-primary to-primary-focus rounded-3xl m-8 p-12 text-white grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="cta-content">
+                <h2 class="cta-title text-4xl font-bold mb-4">¿Listo para comenzar tu transformación?</h2>
+                <p class="cta-description text-lg opacity-90 mb-8">
+                    Únete a miles de estudiantes que ya están construyendo su futuro profesional
+                </p>
+                <div class="cta-actions flex flex-col gap-6">
+                    <button class="btn cta-btn bg-white text-primary px-8 py-4 rounded-xl text-lg font-semibold border-none cursor-pointer flex items-center gap-2 transition-all duration-300 self-start hover:translate-y-[-2px] hover:shadow-lg hover:shadow-white/30" (click)="goToCourses()">
+                        Comenzar Ahora
+                        <span class="btn-icon">🚀</span>
+                    </button>
+                    <div class="cta-features flex flex-col gap-3">
+                         </div>
+                </div>
+            </div>
+            <div class="cta-visual">
+                 </div>
+        </section>
+        
+    </main>
+</div>

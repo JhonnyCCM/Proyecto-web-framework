@@ -1,0 +1,208 @@
+/* Estilos específicos para LoginComponent que no son fácilmente Tailwind */
+
+/* Animaciones de la sección de ilustración */
+.illustration-section .star {
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.illustration-section .water-reflection {
+  animation: wave 3s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.illustration-section .floating-cube,
+.illustration-section .floating-sphere {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+/* Reglas específicas de forma para montañas/edificios (mantener estas aquí) */
+/* Los colores usan tus variables, las cuales son accesibles porque variables.css se importa globalmente */
+.mountain-1 {
+  left: 10%;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 120px solid rgba(99, 102, 241, 0.3); /* Usar tu variable --primary-color con opacidad */
+}
+.mountain-2 {
+  left: 40%;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 150px solid rgba(99, 102, 241, 0.4);
+}
+.mountain-3 {
+  right: 20%;
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-bottom: 100px solid rgba(99, 102, 241, 0.2);
+}
+
+.moon { /* Ubicación y tamaño se manejan en HTML, solo el gradiente aquí */
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  top: 15%; /* Mantener la posición, si no es Tailwind */
+  right: 15%; /* Mantener la posición, si no es Tailwind */
+}
+
+.buildings .building-1 {
+  left: 15%; /* Mantener la posición */
+  width: 60px;
+  height: 120px;
+  background: linear-gradient(180deg, var(--primary-color), var(--primary-hover));
+}
+.buildings .building-2 {
+  left: 50%; /* Mantener la posición */
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.8), rgba(99, 102, 241, 0.6));
+}
+.buildings .building-3 {
+  right: 25%; /* Mantener la posición */
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.6), rgba(99, 102, 241, 0.4));
+}
+
+.building-light {
+  background: #ffd700;
+  /* Posiciones específicas mantenidas en HTML */
+}
+.building-window {
+  background: #ffd700;
+  /* Posiciones específicas mantenidas en HTML */
+}
+
+.water {
+  height: 100px; /* Mantener la altura */
+  background: linear-gradient(180deg,
+    rgba(99, 102, 241, 0.3) 0%,
+    rgba(99, 102, 241, 0.5) 50%,
+    rgba(99, 102, 241, 0.7) 100%
+  );
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    135deg,
+    var(--bg-secondary) 0%,
+    var(--bg-tertiary) 25%,
+    var(--bg-primary) 50%,
+    var(--primary-color) 75%,
+    var(--primary-hover) 100%
+  );
+}
+
+/* Checkbox customizado (mantener si no se usa plugin de Tailwind Forms) */
+.remember-checkbox input[type="checkbox"] {
+  display: none;
+}
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.remember-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.remember-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Estilos de carga del botón (manejado con clases dinámicas en Angular) */
+.login-button.loading .btn-text {
+  display: none;
+}
+.login-button.loading .btn-loading {
+  display: inline;
+}
+
+/* Puedes quitar los media queries de aquí y usar prefijos en el HTML directamente:
+   Por ejemplo, para `illustration-section { display: none; }` en `@media (max-width: 1024px)`,
+   usa `lg:hidden` en el HTML del `illustration-section`.
+   Sin embargo, si prefieres mantenerlos agrupados, pueden quedarse aquí.
+*/
+/*
+@media (max-width: 1024px) {
+  .illustration-section {
+    display: none;
+  }
+  .login-form-section {
+    flex: none;
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .login-form-section {
+    padding: 1rem;
+  }
+  .welcome-text {
+    font-size: 1.5rem;
+  }
+  .brand-name {
+    font-size: 2rem;
+  }
+  .form-options {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .demo-buttons {
+    flex-direction: column;
+  }
+}
+@media (max-width: 480px) {
+  .form-container {
+    max-width: none;
+  }
+  .modal-overlay {
+    padding: 1rem;
+  }
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+*/

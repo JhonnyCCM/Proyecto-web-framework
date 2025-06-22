@@ -1,0 +1,163 @@
+<div class="login-container flex min-h-screen bg-bg-primary">
+    <div class="login-form-section flex-1 flex items-center justify-center p-8 bg-bg-secondary relative lg:flex-none lg:w-full">
+        <div class="form-container w-full max-w-md">
+            <div class="welcome-header mb-12">
+                <h1 class="welcome-title text-text-primary text-4xl font-extrabold leading-tight lg:text-3xl sm:text-2xl">
+                    <span class="welcome-text block text-text-secondary text-3xl font-light mb-2 sm:text-2xl">Bienvenido a</span>
+                    <span class="brand-name block text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-primary to-primary-hover sm:text-3xl">CourseConnect</span>
+                </h1>
+            </div>
+
+            <form id="loginForm" class="login-form flex flex-col gap-6">
+                <div class="form-group flex flex-col gap-2">
+                    <label for="email" class="form-label text-sm font-medium text-text-primary">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="ejemplo@courseconnect.com"
+                        autocomplete="email"
+                        class="form-input bg-bg-primary border-2 border-border-color rounded-xl p-4 text-base text-text-primary transition-all duration-300 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 placeholder-text-muted"
+                    >
+                    <span class="error-message text-error text-xs mt-1 block min-h-4" id="emailError"></span>
+                </div>
+
+                <div class="form-group flex flex-col gap-2">
+                    <label for="password" class="form-label text-sm font-medium text-text-primary">Contraseña</label>
+                    <div class="password-container relative">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            class="form-input bg-bg-primary border-2 border-border-color rounded-xl p-4 text-base text-text-primary transition-all duration-300 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 placeholder-text-muted"
+                        >
+                        <button type="button" class="password-toggle absolute right-4 top-1/2 -translate-y-1/2 bg-transparent border-none text-text-muted cursor-pointer p-2 rounded-md transition-all duration-300 hover:bg-border-color hover:text-text-primary" onclick="togglePassword('password')">
+                            <span class="toggle-icon">👁️</span>
+                        </button>
+                    </div>
+                    <span class="error-message text-error text-xs mt-1 block min-h-4" id="passwordError"></span>
+                </div>
+
+                <div class="form-options flex justify-between items-center mt-2 mb-2 sm:flex-col sm:items-start sm:gap-4">
+                    <label class="remember-checkbox flex items-center gap-2 cursor-pointer text-sm text-text-secondary">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" class="hidden">
+                        <span class="checkbox-custom w-4.5 h-4.5 border-2 border-border-color rounded-sm flex items-center justify-center transition-all duration-300"></span>
+                        <span class="checkbox-text">Recordar mi sesión</span>
+                    </label>
+                    <a href="#" class="forgot-link text-primary no-underline text-sm font-medium transition-colors duration-300 hover:text-primary-hover hover:underline" onclick="showForgotPassword()">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-button bg-gradient-to-br from-primary to-primary-hover text-white border-none rounded-xl p-4 text-base font-semibold tracking-wide cursor-pointer transition-all duration-300 relative overflow-hidden mt-4 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-primary/30 disabled:bg-text-muted disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" id="loginBtn">
+                    <span class="btn-text">INICIAR SESIÓN</span>
+                    <span class="btn-loading hidden">Iniciando...</span>
+                </button>
+
+                <div class="demo-section mt-8 pt-6 border-t border-border-color">
+                    <p class="demo-title text-sm text-text-secondary mb-4 text-center">Credenciales de prueba:</p>
+                    <div class="demo-buttons flex gap-2 justify-center flex-wrap sm:flex-col">
+                        <button type="button" class="demo-btn bg-bg-primary border border-border-color rounded-lg p-2 text-sm text-text-secondary cursor-pointer transition-all duration-300 hover:bg-border-color hover:text-text-primary hover:translate-y-[-1px]" onclick="fillDemoCredentials('admin')">
+                            👨‍💼 Admin
+                        </button>
+                        <button type="button" class="demo-btn bg-bg-primary border border-border-color rounded-lg p-2 text-sm text-text-secondary cursor-pointer transition-all duration-300 hover:bg-border-color hover:text-text-primary hover:translate-y-[-1px]" onclick="fillDemoCredentials('student')">
+                            👨‍🎓 Estudiante
+                        </button>
+                        <button type="button" class="demo-btn bg-bg-primary border border-border-color rounded-lg p-2 text-sm text-text-secondary cursor-pointer transition-all duration-300 hover:bg-border-color hover:text-text-primary hover:translate-y-[-1px]" onclick="fillDemoCredentials('instructor')">
+                            👨‍🏫 Instructor
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="signup-link text-center mt-8 pt-6 border-t border-border-color">
+                <p class="text-text-secondary text-sm m-0">¿No tienes una cuenta?
+                    <a routerLink="/registro" class="signup-btn text-primary no-underline font-semibold transition-colors duration-300 hover:text-primary-hover hover:underline">Regístrate</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="illustration-section flex-1 relative overflow-hidden min-h-screen hidden lg:block">
+        <div class="illustration-container relative w-full h-full">
+            <div class="gradient-bg absolute inset-0 opacity-90"></div>
+
+            <div class="stars absolute inset-0">
+                <div class="star star-1 absolute w-1 h-1 bg-white rounded-full"></div>
+                <div class="star star-2 absolute w-1 h-1 bg-white rounded-full"></div>
+                <div class="star star-3 absolute w-1 h-1 bg-white rounded-full"></div>
+                <div class="star star-4 absolute w-1 h-1 bg-white rounded-full"></div>
+                <div class="star star-5 absolute w-1 h-1 bg-white rounded-full"></div>
+            </div>
+
+            <div class="moon absolute w-20 h-20 rounded-full shadow-lg"></div>
+
+            <div class="mountains absolute bottom-[40%] left-0 right-0 h-52">
+                <div class="mountain mountain-1 absolute bottom-0"></div>
+                <div class="mountain mountain-2 absolute bottom-0"></div>
+                <div class="mountain mountain-3 absolute bottom-0"></div>
+            </div>
+
+            <div class="buildings absolute bottom-[20%] left-0 right-0 h-52">
+                <div class="building building-1 absolute bottom-0 relative rounded-t-lg">
+                    <div class="building-light light-1 absolute w-2 h-2 rounded-sm"></div>
+                    <div class="building-light light-2 absolute w-2 h-2 rounded-sm"></div>
+                    <div class="building-light light-3 absolute w-2 h-2 rounded-sm"></div>
+                </div>
+                <div class="building building-2 absolute bottom-0 relative rounded-t-xl">
+                    <div class="building-window absolute w-4 h-4 rounded-sm"></div>
+                    <div class="building-window absolute w-4 h-4 rounded-sm"></div>
+                </div>
+                <div class="building building-3 absolute bottom-0 rounded-t-md"></div>
+            </div>
+
+            <div class="water absolute bottom-0 left-0 right-0 h-24">
+                <div class="water-reflection absolute inset-0"></div>
+            </div>
+
+            <div class="floating-elements absolute inset-0">
+                <div class="floating-cube cube-1 absolute w-5 h-5 rounded-sm"></div>
+                <div class="floating-cube cube-2 absolute w-5 h-5 rounded-sm"></div>
+                <div class="floating-sphere absolute w-4 h-4 rounded-full"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center p-8 z-[1000]" id="forgotPasswordModal" [style.display]="showForgotPasswordModal ? 'flex' : 'none'">
+    <div class="modal-content bg-bg-secondary rounded-xl w-full max-w-md border border-border-color">
+        <div class="modal-header flex justify-between items-center p-6 border-b border-border-color">
+            <h3 class="text-text-primary text-xl font-semibold m-0">Recuperar Contraseña</h3>
+            <button type="button" class="modal-close bg-transparent border-none text-text-secondary text-2xl cursor-pointer p-1 rounded-sm transition-colors duration-300 hover:text-text-primary" (click)="hideForgotPassword()">×</button>
+        </div>
+        <div class="modal-body p-6">
+            <p class="text-text-secondary mb-4 leading-relaxed">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
+            <form id="forgotPasswordForm">
+                <div class="form-group flex flex-col gap-2">
+                    <label for="forgotEmail">Correo Electrónico</label>
+                    <input
+                        type="email"
+                        id="forgotEmail"
+                        name="forgotEmail"
+                        required
+                        placeholder="ejemplo@correo.com"
+                        class="form-input bg-bg-primary border-2 border-border-color rounded-xl p-4 text-base text-text-primary transition-all duration-300 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 placeholder-text-muted"
+                    >
+                    <span class="error-message text-error text-xs mt-1 block min-h-4" id="forgotEmailError"></span>
+                </div>
+                <div class="modal-actions flex gap-3 justify-end mt-6 sm:flex-col">
+                    <button type="button" class="btn-secondary bg-bg-primary text-text-secondary border border-border-color rounded-lg px-4 py-2 text-sm cursor-pointer transition-all duration-300 hover:bg-border-color hover:text-text-primary" (click)="hideForgotPassword()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary bg-primary text-white border-none rounded-lg px-4 py-2 text-sm cursor-pointer transition-all duration-300 hover:bg-primary-hover">
+                        Enviar Instrucciones
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+/* Estilos específicos para Header en Home (o puedes extraer a un componente Header) */
+
+/* Puedes usar "position: sticky; top: 0; z-index: 50;" con Tailwind: sticky top-0 z-50 */
+.main-header {
+  /* Aquí solo mantenemos lo que no se mapea directamente a Tailwind */
+}
+
+.search-input:focus {
+  outline: none;
+  /* box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); -- Esto es 'focus:ring-primary/10' en Tailwind */
+}
+
+/* Puedes convertir estos hover a clases de Tailwind en el HTML */
+.filter-btn:hover,
+.notification-btn:hover {
+  background: var(--border-color); /* bg-border-color */
+  color: var(--text-primary); /* text-text-primary */
+}
+
+.user-profile:hover {
+  background: var(--bg-primary); /* bg-bg-primary */
+}
+
+/* Responsive (es mejor con prefijos de Tailwind en HTML) */
+@media (max-width: 768px) {
+  .main-header {
+    padding: 1rem; /* Tailwind: sm:p-4 */
+  }
+  .header-center {
+    margin: 0 1rem; /* Tailwind: sm:mx-4 */
+  }
+  .user-name {
+    display: none; /* Tailwind: sm:hidden */
+  }
+}
+/* Estilos específicos para tarjetas de cursos en Home (se pueden refactorizar a un componente CourseCard) */
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Aplicar con 'hover:shadow-xl' o similar de Tailwind */
+  border-color: var(--primary-color); /* hover:border-primary */
+}
+
+.course-actions {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.course-card:hover .course-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  transition: all 0.3s ease;
+}
+.action-btn:hover {
+  transform: scale(1.1); /* hover:scale-110 */
+}
+.edit-btn:hover {
+  background: var(--warning-color); /* bg-warning */
+}
+.delete-btn:hover {
+  background: var(--error-color); /* bg-error */
+}
+
+.course-image img {
+  transition: transform 0.3s ease;
+}
+.course-card:hover .course-image img {
+  transform: scale(1.05); /* hover:scale-105 */
+}
+
+.carousel-track {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Animación de carousel, la moveremos a home.component.ts con Angular */
+
+/* Animaciones hero-visual */
+/* Estas animaciones (float y rotate) también pueden ir en home.component.css */
+/* Ya te las incluí en login.component.css, asegurémonos de que solo estén en un lugar,
+   o que sean parte de un archivo global si son reutilizadas.
+   Para evitar duplicados, si ya están en login.component.css, no las pongas aquí. */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive (es mejor con prefijos de Tailwind en HTML) */
+@media (max-width: 768px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .course-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .course-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .price-container {
+    align-items: flex-start;
+  }
+  .add-course-btn {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

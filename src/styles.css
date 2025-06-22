@@ -1,2 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
-@import "tailwindcss";
+/* ================================================================= */
+/* 1. DIRECTIVAS DE TAILWIND CSS (MÉTODO MODERNO)                    */
+/* ================================================================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ================================================================= */
+/* 2. CONFIGURACIÓN DEL TEMA DE DAISYUI                              */
+/* CORRECCIÓN FINAL-FINAL: Se eliminaron las comillas de todas las   */
+/* propiedades para que tengan la sintaxis correcta de --variable.   */
+/* ================================================================= */
+@theme {
+  --primary:                  #6366f1;
+  --primary-focus:          #5855eb;
+  --primary-content:        #ffffff;
+  
+  --base-100:                 #0f0f23;
+  --base-200:                 #1a1a2e;
+  --base-300:                 #16213e;
+  --base-content:             #ffffff;
+
+  --info:                     #3b82f6;
+  --success:                  #10b981;
+  --warning:                  #f59e0b;
+  --error:                    #ef4444;
+  
+  --border-color:             #27272a;
+  --rounded-box:              0.75rem;
+  --rounded-btn:              0.5rem;
+}
+
+
+/* ================================================================= */
+/* 3. ESTILOS GLOBALES                                               */
+/* ================================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a2e; /* base-200 */
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a; /* --border-color */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
