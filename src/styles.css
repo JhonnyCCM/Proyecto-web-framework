@@ -1,9 +1,8 @@
 /* ================================================================= */
 /* 1. DIRECTIVAS DE TAILWIND CSS (MÉTODO MODERNO)                    */
 /* ================================================================= */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
 
 
 /* ================================================================= */
@@ -12,23 +11,23 @@
 /* propiedades para que tengan la sintaxis correcta de --variable.   */
 /* ================================================================= */
 @theme {
-  --primary:                  #6366f1;
-  --primary-focus:          #5855eb;
-  --primary-content:        #ffffff;
+  --color-primary:                  #6366f1;
+  --color-primary-focus:          #5855eb;
+  --color-primary-content:        #ffffff;
   
-  --base-100:                 #0f0f23;
-  --base-200:                 #1a1a2e;
-  --base-300:                 #16213e;
-  --base-content:             #ffffff;
+  --color-base-100:                 #0f0f23;
+  --color-base-200:                 #1a1a2e;
+  --color-base-300:                 #16213e;
+  --color-base-content:             #ffffff;
 
-  --info:                     #3b82f6;
-  --success:                  #10b981;
-  --warning:                  #f59e0b;
-  --error:                    #ef4444;
+  --color-info:                     #3b82f6;
+  --color-success:                  #10b981;
+  --color-warning:                  #f59e0b;
+  --color-error:                    #ef4444;
   
-  --border-color:             #27272a;
-  --rounded-box:              0.75rem;
-  --rounded-btn:              0.5rem;
+  --color-border-color:             #27272a;
+  --color-rounded-box:              0.75rem;
+  --color-rounded-btn:              0.5rem;
 }
 
 
