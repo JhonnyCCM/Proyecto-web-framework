@@ -1,0 +1,18 @@
+/* Estilos para el scrollbar de los eventos en cada día del calendario */
+.day-events {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-base-300) transparent;
+}
+
+.day-events::-webkit-scrollbar {
+  width: 5px;
+}
+
+.day-events::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.day-events::-webkit-scrollbar-thumb {
+  background-color: var(--color-base-300);
+  border-radius: 6px;
+}

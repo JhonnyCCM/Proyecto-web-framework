@@ -1,0 +1,93 @@
+<div *ngIf="course$ | async as course; else loadingOrError">
+  <!-- Header del Aula -->
+  <header class="page-header p-4 bg-base-200 border-b border-base-300">
+    <div class="text-sm breadcrumbs">
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/courses">Cursos</a></li>
+        <li>{{ course.title }}</li>
+      </ul>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+      <div>
+        <h1 class="text-2xl font-bold">{{ course.title }}</h1>
+        <p class="text-base-content/70">Versión Completa</p>
+      </div>
+      <!-- Aquí podrías añadir el progreso del curso -->
+    </div>
+  </header>
+
+  <!-- Contenido Principal del Aula -->
+  <div class="classroom-content grid grid-cols-1 lg:grid-cols-4 gap-6 p-4">
+    
+    <!-- Panel de Lecciones (Izquierda) -->
+    <aside class="lg:col-span-1 card bg-base-200 shadow-xl overflow-hidden">
+      <div class="card-body p-4">
+        <h2 class="card-title text-lg">Contenido del Curso</h2>
+        <div class="modules-list space-y-4 mt-4 max-h-[70vh] overflow-y-auto">
+          <div *ngFor="let module of course.modules" class="collapse collapse-arrow bg-base-100">
+            <input type="radio" name="my-accordion-2" [checked]="module.id === 'module_1'" /> 
+            <div class="collapse-title text-md font-medium">{{ module.title }}</div>
+            <div class="collapse-content"> 
+              <ul class="menu p-0">
+                <li *ngFor="let lesson of module.lessons" (click)="selectLesson(lesson)"
+                    [class.bordered]="selectedLesson?.id === lesson.id">
+                  <a>
+                    <span [class.text-success]="lesson.completed">
+                      {{ lesson.completed ? '✓' : '●' }}
+                    </span>
+                    {{ lesson.title }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Panel Principal (Centro) -->
+    <div class="lg:col-span-3 card bg-base-200 shadow-xl">
+      <div class="card-body p-0">
+        <!-- Pestañas de Navegación -->
+        <div class="tabs tabs-bordered px-6 pt-4">
+          <a class="tab" [class.tab-active]="activeTab === 'video'" (click)="setTab('video')">🎥 Video</a>
+          <a class="tab" [class.tab-active]="activeTab === 'materials'" (click)="setTab('materials')">📚 Materiales</a>
+          <a class="tab" [class.tab-active]="activeTab === 'quiz'" (click)="setTab('quiz')">❓ Quiz</a>
+          <a class="tab" [class.tab-active]="activeTab === 'notes'" (click)="setTab('notes')">📝 Mis Notas</a>
+        </div>
+
+        <!-- Contenido de las Pestañas -->
+        <div class="p-6">
+          <div *ngIf="selectedLesson">
+            <h2 class="text-2xl font-bold mb-4">{{ selectedLesson.title }}</h2>
+
+            <!-- Contenido de la pestaña Video -->
+            <div *ngIf="activeTab === 'video'">
+              <div class="aspect-video bg-black rounded-lg mb-4">
+                <!-- El reproductor de video iría aquí -->
+                <p class="text-white text-center p-8">Simulación de reproductor de video</p>
+              </div>
+              <h4 class="font-bold text-lg">Descripción</h4>
+              <p>{{ selectedLesson.description }}</p>
+            </div>
+
+            <!-- Contenido de otras pestañas -->
+            <div *ngIf="activeTab !== 'video'" class="text-center p-8 bg-base-100 rounded-lg">
+              <p class="text-2xl font-bold">{{ activeTab | titlecase }}</p>
+              <p>Contenido para esta sección no implementado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="text-center p-8">
+    <span class="loading loading-lg loading-spinner"></span>
+    <p>Cargando contenido del curso...</p>
+  </div>
+</ng-template>

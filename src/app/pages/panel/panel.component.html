@@ -1,0 +1,120 @@
+<div class="p-4 sm:p-8">
+  <!-- Header de la página -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold">Panel de Control</h1>
+    <p class="text-base-content/70">Bienvenido de nuevo, aquí tienes un resumen de tu actividad.</p>
+  </div>
+
+  <!-- Contenido del Dashboard -->
+  <div class="dashboard-container grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+    <!-- Columna Izquierda (más ancha) -->
+    <div class="lg:col-span-2 xl:col-span-3 flex flex-col gap-6">
+      <!-- Tarjetas de Aprendizaje -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div *ngFor="let card of learningCards$ | async" class="card bg-base-200 shadow-xl text-center p-6">
+          <h2 class="text-3xl font-bold">{{ card.hours }}</h2>
+          <p class="text-base-content/70">{{ card.subject }}</p>
+          <div class="text-4xl mt-4">{{ getScheduleIcon(card.type) }}</div>
+        </div>
+      </div>
+
+      <!-- Gráfico de Horas -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Horas Dedicadas</h2>
+          <div class="flex justify-center items-end gap-2 sm:gap-4 h-48 p-4">
+            <div *ngFor="let item of chartData$ | async" class="flex flex-col items-center flex-1">
+              <div class="flex flex-col-reverse items-center h-full w-full">
+                <div class="bg-primary/50 w-1/2 h-full rounded-t-lg" [style.height.%]="(item.uiDesign / 8) * 100"></div>
+                <div class="bg-secondary/50 w-1/2 h-full rounded-t-lg" [style.height.%]="(item.digitalMarketing / 8) * 100"></div>
+              </div>
+              <span class="text-xs mt-2">{{ item.day }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de Tareas -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Mis Tareas</h2>
+          <div class="overflow-x-auto">
+            <table class="table w-full">
+              <thead>
+                <tr>
+                  <th>Nombre de la Tarea</th>
+                  <th>Total</th>
+                  <th>Puntuación</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of assignments$ | async" class="hover">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="avatar placeholder">
+                        <div class="bg-neutral text-neutral-content rounded-full w-10">
+                          <span>{{ getAssignmentIcon(item.type) }}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="font-bold">{{ item.name }}</div>
+                        <div class="text-sm opacity-50">{{ item.category }}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ item.total }}</td>
+                  <td>{{ item.score }}</td>
+                  <td>
+                    <span class="badge" [class.badge-success]="item.status === 'completed'" [class.badge-warning]="item.status === 'progress'">
+                      {{ item.status === 'completed' ? 'Completado' : 'En Progreso' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna Derecha -->
+    <div class="lg:col-span-1 xl:col-span-1 flex flex-col gap-6">
+      <!-- Cronograma -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Cronograma de Cursos</h2>
+          <ul class="space-y-4">
+            <li *ngFor="let item of schedule$ | async" class="flex items-center gap-4">
+              <div class="avatar placeholder">
+                <div class="bg-neutral-focus text-neutral-content rounded-lg w-12">
+                  <span>{{ getScheduleIcon(item.type) }}</span>
+                </div>
+              </div>
+              <div>
+                <p class="font-semibold">{{ item.title }}</p>
+                <p class="text-sm text-base-content/70">{{ item.category }} • {{ item.time }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Progreso General -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">Progreso General</h2>
+          <div class="radial-progress text-primary my-4" [style.--value]="progressPercentage" role="progressbar" style="--size:12rem; --thickness: 1rem;">
+            {{ progressPercentage }}%
+          </div>
+          <div class="flex justify-center gap-4">
+            <div><span class="badge badge-primary"></span> Completado</div>
+            <div><span class="badge badge-ghost"></span> En progreso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

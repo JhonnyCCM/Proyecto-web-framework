@@ -1,0 +1,8 @@
+/* La mayoría de los estilos son manejados por Tailwind y DaisyUI. */
+/* Puedes añadir sobreescrituras o estilos complejos aquí. */
+
+/* Ajuste para que el overlay de la tarjeta sea más sutil */
+.card.image-full:before {
+    background-color: black;
+    opacity: 0.4;
+}

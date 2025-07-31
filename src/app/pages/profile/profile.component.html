@@ -1,0 +1,157 @@
+<div *ngIf="currentUser as user" class="profile-container p-4 md:p-8">
+
+  <!-- ==================== HEADER DEL PERFIL (CORREGIDO) ==================== -->
+  <section class="profile-header card lg:card-side bg-base-200 shadow-xl mb-8">
+    <figure class="p-8 flex justify-center items-center">
+      <!-- Este div ahora es el ancla de posicionamiento para el avatar y el botón -->
+      <div class="relative w-32 h-32">
+        <div class="avatar w-32 h-32">
+          <div class="w-full rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <!-- CORRECCIÓN: Se añade 'object-cover' para que la imagen llene el círculo sin deformarse -->
+            <img [src]="user.avatar || 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'" 
+                 [alt]="user.fullName" 
+                 class="object-cover" />
+          </div>
+        </div>
+        <!-- CORRECCIÓN: Se ajusta el posicionamiento del botón para que quede en la esquina del avatar -->
+        <label class="btn btn-sm btn-circle absolute bottom-1 right-1">
+          📷
+          <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
+        </label>
+      </div>
+    </figure>
+    <div class="card-body">
+      <h1 class="card-title text-3xl">{{ user.fullName }}</h1>
+      <p>{{ user.title || 'Sin título profesional' }}</p>
+      
+      <div *ngIf="profileData" class="stats stats-vertical lg:stats-horizontal shadow mt-4">
+        <div class="stat">
+          <div class="stat-title">Cursos</div>
+          <div class="stat-value text-primary">{{ profileData.stats.courses }}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Horas</div>
+          <div class="stat-value text-secondary">{{ profileData.stats.hours }}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Certificados</div>
+          <div class="stat-value">{{ profileData.stats.certificates }}</div>
+        </div>
+      </div>
+      <div class="card-actions justify-end mt-4">
+        <button class="btn btn-primary" (click)="openModal('editProfile')">✏️ Editar Perfil</button>
+        <button class="btn btn-outline" (click)="openModal('changePassword')">🔒 Cambiar Contraseña</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTENIDO DEL PERFIL (SIN CAMBIOS) ==================== -->
+  <div *ngIf="profileData" class="profile-content grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <div class="main-column lg:col-span-2 flex flex-col gap-8">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Acerca de mí</h2>
+          <p>{{ user.bio || 'Añade una biografía para presentarte a la comunidad.' }}</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Habilidades</h2>
+          <div class="skills-container flex flex-col gap-4">
+            <div *ngFor="let skill of profileData.skills" class="skill-item">
+              <span class="skill-name">{{ skill.name }}</span>
+              <progress class="progress progress-primary w-full" [value]="skill.level" max="100"></progress>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-column flex flex-col gap-8">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Metas de Aprendizaje</h2>
+          <ul class="space-y-2">
+            <li *ngFor="let goal of profileData.goals" class="flex items-center gap-2">
+              <span>{{ goal.icon }}</span>
+              <span class="flex-1">{{ goal.text }}</span>
+              <div class="tooltip" [attr.data-tip]="goal.status">
+                <span *ngIf="goal.status === 'completed'" class="badge badge-success"></span>
+                <span *ngIf="goal.status === 'in-progress'" class="badge badge-warning"></span>
+                <span *ngIf="goal.status === 'pending'" class="badge badge-ghost"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Actividad Reciente</h2>
+          <ul class="space-y-4">
+            <li *ngFor="let activity of profileData.activities" class="flex items-start gap-4">
+              <div class="text-2xl">{{ activity.icon }}</div>
+              <div>
+                <p class="font-semibold">{{ activity.title }}</p>
+                <p class="text-sm text-base-content/70">{{ activity.description }}</p>
+                <p class="text-xs text-base-content/50">{{ activity.time }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== MODALES (SIN CAMBIOS) ==================== -->
+<div *ngIf="showEditProfileModal" class="modal modal-open">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Editar Perfil</h3>
+        <form [formGroup]="editProfileForm" (ngSubmit)="onUpdateProfile()">
+            <div class="form-control w-full">
+                <label class="label"><span class="label-text">Nombre Completo</span></label>
+                <input type="text" formControlName="fullName" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+                <label class="label"><span class="label-text">Título Profesional</span></label>
+                <input type="text" formControlName="title" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+                <label class="label"><span class="label-text">Biografía</span></label>
+                <textarea formControlName="bio" class="textarea textarea-bordered w-full" rows="3"></textarea>
+            </div>
+            <div class="modal-action">
+                <button type="button" class="btn btn-ghost" (click)="closeModals()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="editProfileForm.invalid">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="showChangePasswordModal" class="modal modal-open">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Cambiar Contraseña</h3>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="onUpdatePassword()">
+            <div class="form-control w-full">
+                <label class="label"><span class="label-text">Contraseña Actual</span></label>
+                <input type="password" formControlName="currentPassword" class="input input-bordered w-full" 
+                       [class.input-error]="changePasswordForm.get('currentPassword')?.hasError('incorrect')" />
+                <label class="label" *ngIf="changePasswordForm.get('currentPassword')?.hasError('incorrect')">
+                  <span class="label-text-alt text-error">La contraseña actual es incorrecta.</span>
+                </label>
+            </div>
+            <div class="form-control w-full">
+                <label class="label"><span class="label-text">Nueva Contraseña</span></label>
+                <input type="password" formControlName="newPassword" class="input input-bordered w-full" />
+            </div>
+            <div class="modal-action">
+                <button type="button" class="btn btn-ghost" (click)="closeModals()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="changePasswordForm.invalid">Actualizar Contraseña</button>
+            </div>
+        </form>
+    </div>
+</div>

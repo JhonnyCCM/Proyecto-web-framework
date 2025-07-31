@@ -1,0 +1,17 @@
+/* Puedes añadir aquí estilos específicos que no cubra Tailwind/DaisyUI,
+   o que quieras sobreescribir. Por ejemplo, animaciones. */
+
+.skill-item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Adaptación para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .skill-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}

@@ -1,1 +1,61 @@
-<p>sidebar works!</p>
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <button class="sidebar-toggle" (click)="toggleSidebar()">
+    {{ isCollapsed ? '▶' : '◀' }}
+  </button>
+  
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">📚</span>
+      <span *ngIf="!isCollapsed" class="logo-text">CourseConnect</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <!-- Navegación Principal -->
+    <a *ngFor="let item of mainNav$ | async" 
+       [routerLink]="item.url" 
+       routerLinkActive="active" 
+       [routerLinkActiveOptions]="{exact: item.url === '/'}"
+       class="nav-item tooltip" 
+       [attr.data-tooltip]="item.text">
+      <span class="nav-icon">{{ item.icon }}</span>
+      <span *ngIf="!isCollapsed" class="nav-text">{{ item.text }}</span>
+    </a>
+
+    <!-- Separador -->
+    <hr class="my-4 border-t border-base-300">
+
+    <!-- Navegación de Usuario -->
+    <a *ngFor="let item of userNav$ | async" 
+       [routerLink]="item.url" 
+       routerLinkActive="active" 
+       class="nav-item tooltip" 
+       [attr.data-tooltip]="item.text">
+      <span class="nav-icon">{{ item.icon }}</span>
+      <span *ngIf="!isCollapsed" class="nav-text">{{ item.text }}</span>
+    </a>
+    
+    <!-- Navegación de Admin -->
+    <!-- CORRECCIÓN: Usamos un *ngIf más seguro para evitar el error 'undefined' -->
+    <ng-container *ngIf="(adminNav$ | async) as adminNav">
+        <ng-container *ngIf="adminNav.length > 0">
+            <hr class="my-4 border-t border-base-300">
+            <a *ngFor="let item of adminNav" 
+               [routerLink]="item.url" 
+               routerLinkActive="active" 
+               class="nav-item tooltip" 
+               [attr.data-tooltip]="item.text">
+              <span class="nav-icon">{{ item.icon }}</span>
+              <span *ngIf="!isCollapsed" class="nav-text">{{ item.text }}</span>
+            </a>
+        </ng-container>
+    </ng-container>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn tooltip" (click)="logout()" data-tooltip="Cerrar Sesión">
+      <span class="logout-icon">🚪</span>
+      <span *ngIf="!isCollapsed" class="logout-text">Cerrar Sesión</span>
+    </button>
+  </div>
+</aside>

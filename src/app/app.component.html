@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+  <!-- El sidebar solo se renderiza si hay un usuario -->
+  <app-sidebar *ngIf="currentUser$ | async"></app-sidebar>
+
+  <!-- El contenido principal siempre se muestra -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

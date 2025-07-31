@@ -1,0 +1,108 @@
+<div class="p-4 sm:p-8">
+  <!-- Header de la página -->
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+    <div>
+      <h1 class="text-3xl font-bold">Cronograma</h1>
+      <p class="text-base-content/70">Organiza tus clases, tareas y eventos importantes.</p>
+    </div>
+    <button class="btn btn-primary" (click)="openEventModal()">
+      + Añadir Evento
+    </button>
+  </div>
+
+  <!-- Contenedor del Calendario -->
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <!-- Navegación del Mes -->
+      <div class="flex justify-between items-center mb-4">
+        <button class="btn btn-ghost btn-circle" (click)="changeMonth(-1)">«</button>
+        <h2 class="text-xl font-bold text-center">
+          {{ currentDate | date:'LLLL yyyy' | titlecase }}
+        </h2>
+        <button class="btn btn-ghost btn-circle" (click)="changeMonth(1)">»</button>
+      </div>
+
+      <!-- Grid del Calendario -->
+      <div class="grid grid-cols-7 gap-1">
+        <!-- Encabezados de los días de la semana -->
+        <div *ngFor="let day of weekDays" class="text-center font-semibold text-sm text-base-content/60 py-2">{{ day }}</div>
+        
+        <!-- Días del mes -->
+        <div *ngFor="let day of calendarDays" 
+             class="relative h-32 border border-base-300 rounded-lg p-2 flex flex-col overflow-hidden"
+             [ngClass]="{ 'bg-base-100': !day.isCurrentMonth, 'bg-primary/10': day.isToday }">
+          
+          <span class="font-semibold" [ngClass]="{ 'text-base-content/40': !day.isCurrentMonth }">
+            {{ day.dayOfMonth }}
+          </span>
+          
+          <!-- Eventos del día -->
+          <div class="mt-1 space-y-1 overflow-y-auto day-events">
+            <div *ngFor="let event of day.events" 
+                 class="text-xs p-1 rounded cursor-pointer truncate"
+                 [ngClass]="{
+                   'bg-primary text-primary-content': event.type === 'courses',
+                   'bg-success text-success-content': event.type === 'assignments',
+                   'bg-error text-error-content': event.type === 'exams',
+                   'bg-info text-info-content': event.type === 'meetings'
+                 }"
+                 (click)="openEventModal(day, event)">
+              {{ event.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Añadir/Editar Evento -->
+<div *ngIf="isModalOpen" class="modal modal-open">
+  <div class="modal-box w-11/12 max-w-lg">
+    <h3 class="font-bold text-lg">{{ editingEvent ? 'Editar Evento' : 'Añadir Nuevo Evento' }}</h3>
+    <form [formGroup]="eventForm" (ngSubmit)="onEventSubmit()" class="mt-4 space-y-4">
+      
+      <div class="form-control">
+        <label class="label"><span class="label-text">Título</span></label>
+        <input type="text" formControlName="title" class="input input-bordered" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="form-control">
+          <label class="label"><span class="label-text">Fecha</span></label>
+          <input type="date" formControlName="date" class="input input-bordered" />
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text">Hora</span></label>
+          <input type="time" formControlName="time" class="input input-bordered" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="form-control">
+          <label class="label"><span class="label-text">Duración (min)</span></label>
+          <input type="number" formControlName="duration" class="input input-bordered" />
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text">Tipo</span></label>
+          <select formControlName="type" class="select select-bordered">
+            <option value="courses">Curso</option>
+            <option value="assignments">Tarea</option>
+            <option value="exams">Examen</option>
+            <option value="meetings">Reunión</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-action justify-between">
+        <button *ngIf="editingEvent" type="button" class="btn btn-error" (click)="onDeleteEvent()">Eliminar</button>
+        <div>
+          <button type="button" class="btn btn-ghost" (click)="closeEventModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">
+            {{ editingEvent ? 'Actualizar' : 'Guardar' }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

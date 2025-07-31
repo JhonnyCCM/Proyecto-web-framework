@@ -1,0 +1,13 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
+}
+
+.main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  /* Este padding previene que el contenido se oculte detrás del header si lo tienes fijo */
+  
+}

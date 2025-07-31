@@ -1,0 +1,59 @@
+<div class="register-container flex min-h-screen bg-base-100 items-center justify-center p-8">
+  <div class="form-container w-full max-w-lg bg-base-200 p-8 md:p-12 rounded-2xl shadow-xl">
+
+    <div class="welcome-header mb-8 text-center">
+      <h1 class="text-4xl font-bold">
+        <span class="block text-3xl font-light text-base-content/80 mb-2">Crea tu cuenta en</span>
+        <span class="block text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-primary to-primary-focus">CourseConnect</span>
+      </h1>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Nombre Completo</span></label>
+        <input type="text" formControlName="fullName" placeholder="Tu nombre y apellido" class="input input-bordered w-full" 
+               [class.input-error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched" />
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Email</span></label>
+        <input type="email" formControlName="email" placeholder="tu@email.com" class="input input-bordered w-full"
+               [class.input-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" />
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Contraseña</span></label>
+        <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres" class="input input-bordered w-full"
+               [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" />
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label"><span class="label-text">Confirmar Contraseña</span></label>
+        <input type="password" formControlName="confirmPassword" placeholder="Repite tu contraseña" class="input input-bordered w-full"
+               [class.input-error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched || (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)" />
+
+        <label class="label" *ngIf="registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched">
+            <span class="label-text-alt text-error">Las contraseñas no coinciden.</span>
+        </label>
+      </div>
+
+      <div *ngIf="registerError" class="alert alert-error mt-4">
+        <span>{{ registerError }}</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg mt-6" [disabled]="registerForm.invalid || isLoading">
+        <span *ngIf="isLoading" class="loading loading-spinner"></span>
+        {{ isLoading ? 'Creando cuenta...' : 'CREAR CUENTA' }}
+      </button>
+
+      <div class="login-link text-center mt-6">
+        <p class="text-base-content/80 text-sm">
+          ¿Ya tienes una cuenta?
+          <a routerLink="/login" class="link link-primary font-semibold">Inicia Sesión</a>
+        </p>
+      </div>
+    </form>
+
+  </div>
+</div>

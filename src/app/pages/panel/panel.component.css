@@ -1,0 +1,10 @@
+/* Puedes añadir estilos específicos para el panel aquí si lo necesitas. */
+/* Por ejemplo, si quieres un color específico para una barra del gráfico que no esté en DaisyUI */
+
+.bar-ui-design {
+    background-color: var(--color-primary); /* O el color que prefieras */
+}
+
+.bar-digital-marketing {
+    background-color: var(--color-secondary); /* O el color que prefieras */
+}

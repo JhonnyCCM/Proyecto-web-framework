@@ -2,28 +2,45 @@
     <main class="main-content flex-1 flex flex-col">
 
         <header class="main-header flex items-center justify-between p-4 bg-base-200 border-b border-neutral sticky top-0 z-50">
-            <div class="header-left">
-                <img src="favicon.ico" alt="CourseConnect" class="w-auto h-8 object-contain">
+    <div class="header-left">
+        <img src="favicon.ico" alt="CourseConnect" class="w-15 h-auto object-contain">
+    </div>
+    <div class="header-center flex-1 mx-4">
+        </div>
+
+    <div class="header-right flex items-center gap-4">
+        <ng-container *ngIf="currentUser$ | async as user; else notLoggedIn">
+            
+            <button class="btn btn-ghost btn-circle text-xl">⚙️</button>
+            <div class="indicator">
+                <span class="indicator-item badge badge-sm badge-error">3</span>
+                <button class="btn btn-ghost btn-circle text-xl">🔔</button>
             </div>
-            <div class="header-center flex-1 mx-4">
-                <div class="search-container relative flex items-center">
-                    <input type="text" class="search-input input input-bordered w-full p-2 pl-10 text-base-content placeholder-base-content/70" placeholder="Buscar cursos, instructores..." id="searchInput">
-                    <button class="search-btn absolute left-3 text-base-content/80">🔍</button>
+
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img [alt]="user.fullName" [src]="user.avatar || 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'" />
+                    </div>
                 </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-52">
+                    <li><p class="font-bold p-2">{{ user.fullName }}</p></li>
+                    <li><a routerLink="/profile">Mi Perfil</a></li>
+                    <li><a (click)="simularLogout()">Cerrar Sesión</a></li>
+                </ul>
             </div>
-            <div class="header-right flex items-center gap-4">
-                <button class="filter-btn btn btn-ghost btn-circle text-xl">⚙️</button>
-                <div class="relative">
-                     <button class="notification-btn btn btn-ghost btn-circle text-xl">🔔</button>
-                    <span class="notification-badge badge badge-sm badge-error absolute top-0 right-0">3</span>
-                </div>
-                <div class="user-profile flex items-center gap-2 cursor-pointer" (click)="toggleUserMenu()">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="User" class="user-avatar w-10 h-10 rounded-full object-cover">
-                    <span class="user-name text-base-content font-semibold" id="userName">Joseph Mitchell</span>
-                    <span class="user-dropdown text-base-content/70">▼</span>
-                </div>
+
+        </ng-container>
+
+        <ng-template #notLoggedIn>
+            <div class="flex items-center gap-2">
+                <a routerLink="/login" class="btn btn-ghost">Iniciar Sesión</a>
+                <a routerLink="/register" class="btn btn-primary">Registrarse</a>
             </div>
-        </header>
+        </ng-template>
+
+    </div>
+</header>
 
         <section class="hero-section bg-gradient-to-br from-base-100 via-base-200 to-primary p-12 relative overflow-hidden">
             <div class="hero-content container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
