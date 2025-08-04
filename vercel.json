@@ -1,5 +1,5 @@
 {
   "buildCommand": "ng build",
-  "outputDirectory": "dist/courseconnect",
+  "outputDirectory": "dist/course-connect/browser",
   "framework": "angular"
 }
