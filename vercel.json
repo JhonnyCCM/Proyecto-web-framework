@@ -1,12 +1,5 @@
 {
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "buildCommand": "ng build",
+  "outputDirectory": "dist/courseconnect",
+  "framework": "angular"
 }
